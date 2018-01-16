@@ -1,7 +1,7 @@
 /*
  * ntp_sandbox.c - privilege containment for the NTP daemon
  *
- * SPDX-License-Identifier: BSD-2-Clause
+ * SPDX-License-Identifier: BSD-2-clause
  */
 
 #include "config.h"
@@ -393,6 +393,7 @@ int scmp_sc[] = {
 	SCMP_SYS(socketpair),
 	SCMP_SYS(statfs),
 	SCMP_SYS(uname),
+	89,
 
 
 #ifdef REFCLOCK

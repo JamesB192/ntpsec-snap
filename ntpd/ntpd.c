@@ -676,7 +676,7 @@ ntpdmain(
 # ifdef REFCLOCK
 	init_refclock();
 # endif
-	set_process_priority();
+//	set_process_priority();
 	init_proto(!dumpopts);		/* Call at high priority */
 	init_io();
 	init_loopfilter();

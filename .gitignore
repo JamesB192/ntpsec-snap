@@ -3,3 +3,9 @@
 *.pyc
 build
 attic/clock
+parts/
+prime/
+snap/
+stage/
+*.snap
+*.tar.bz2

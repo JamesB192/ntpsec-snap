@@ -393,7 +393,6 @@ int scmp_sc[] = {
 	SCMP_SYS(socketpair),
 	SCMP_SYS(statfs),
 	SCMP_SYS(uname),
-	89,
 
 
 #ifdef REFCLOCK

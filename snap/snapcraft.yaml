@@ -18,71 +18,71 @@ confinement: strict # use 'strict' once you have the right plugs and slots
 apps:
   d:
     command: sbin/ntpd -gmn -c $SNAP/etc/default.conf
-    plugs: [network,network-bind,netlink-audit,process-control,time-control]
+    plugs: [network,network-bind,netlink-audit,time-control]
 # serial-port N
     daemon: simple
     restart-condition: never
   dig:
-    command: /usr/bin/python3.5 ${SNAP}/bin/ntpdig.py
+    command: /usr/bin/python3.5 ${SNAP}/bin/ntpdig
     plugs: [network]
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
   frob:
     command: bin/ntpfrob
   keygen:
-    command: /usr/bin/python3.5 ${SNAP}/bin/ntpkeygen.py
+    command: /usr/bin/python3.5 ${SNAP}/bin/ntpkeygen
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
   leapfetch:
     command: bin/ntpleapfetch
     plugs: [network]
   loggps:
-    command: /usr/bin/python3.5 ${SNAP}/bin/ntploggps.py
-#    command: /usr/bin/python3.5 ${SNAP}/bin/ntploggps.py -w 300 -l ${SNAP_DATA}/gpsd
+    command: /usr/bin/python3.5 ${SNAP}/bin/ntploggps
+#    command: /usr/bin/python3.5 ${SNAP}/bin/ntploggps -w 300 -l ${SNAP_DATA}/gpsd
     daemon: simple
 #    restart-condition: never
 #    environment:
 #      PYTHONPATH: $SNAP/lib/python3.5/site-packages
   logtemp:
-    command: /usr/bin/python3.5 ${SNAP}/bin/ntplogtemp.py
-#    command: /usr/bin/python3.5 ${SNAP}/bin/ntplogtemp.py -w 300 -l ${SNAP_DATA}/temps
+    command: /usr/bin/python3.5 ${SNAP}/bin/ntplogtemp
+#    command: /usr/bin/python3.5 ${SNAP}/bin/ntplogtemp -w 300 -l ${SNAP_DATA}/temps
 #    daemon: simple
 #    restart-condition: never
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
   mon:
-    command: /usr/bin/python3.5 ${SNAP}/bin/ntpmon.py
+    command: /usr/bin/python3.5 ${SNAP}/bin/ntpmon
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
     plugs: [network]
   q:
-    command: /usr/bin/python3.5  ${SNAP}/bin/ntpq.py
+    command: /usr/bin/python3.5  ${SNAP}/bin/ntpq
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
     plugs: [network]
   snmpd:
-    command: /usr/bin/python3.5 ${SNAP}/bin/ntpsnmpd.py
+    command: /usr/bin/python3.5 ${SNAP}/bin/ntpsnmpd
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
   time:
     command: bin/ntptime
     plugs: [network]
   sweep:
-    command: /usr/bin/python3.5 ${SNAP}/bin/ntpsweep.py
+    command: /usr/bin/python3.5 ${SNAP}/bin/ntpsweep
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
     plugs: [network]
   trace:
-    command: /usr/bin/python3.5 ${SNAP}/bin/ntptrace.py
+    command: /usr/bin/python3.5 ${SNAP}/bin/ntptrace
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
     plugs: [network]
   viz:
-    command: /usr/bin/python3.5 ${SNAP}/bin/ntpviz.py
+    command: /usr/bin/python3.5 ${SNAP}/bin/ntpviz
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
   wait:
-    command: /usr/bin/python3.5 ${SNAP}/bin/ntpwait.py
+    command: /usr/bin/python3.5 ${SNAP}/bin/ntpwait
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
 

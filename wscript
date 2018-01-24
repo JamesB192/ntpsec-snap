@@ -1079,7 +1079,7 @@ def build(ctx):
     ctx(
         features="subst",
         source=scripts,
-        target=scripts,
+        target=[x.replace('.py', '') for x in scripts],
         chmod=Utils.O755,
         install_path='${BINDIR}',
     )

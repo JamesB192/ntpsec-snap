@@ -181,6 +181,7 @@ struct vsock {
 
 static vsock_t	*fd_list;
 
+#undef USE_ROUTING_SOCKET
 #if defined(USE_ROUTING_SOCKET)
 /*
  * async notification processing (e. g. routing sockets)

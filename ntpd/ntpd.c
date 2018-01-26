@@ -800,7 +800,7 @@ ntpdmain(
 	 * we get some latency improvement that way.
 	 * Need to do this before droproot.
 	 */
-	{
+/*	{
 #ifdef RLIMIT_MEMLOCK
 	    /* RLIMIT_MEMLOCK is Linux/BSD, not POSIX */
 	    struct rlimit rlim;
@@ -815,7 +815,7 @@ ntpdmain(
 	    else
 		msyslog(LOG_INFO, "INIT: successfully locked into RAM");
 	}
-
+*/
 #ifdef ENABLE_EARLY_DROPROOT
 	/* drop root privileges */
 	/* This doesn't work on NetBSD or with SHM */

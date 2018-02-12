@@ -25,6 +25,7 @@
 #include "isc_interfaceiter.h"
 #include "isc_netaddr.h"
 
+/*
 #ifdef HAVE_NET_ROUTE_H
 # define USE_ROUTING_SOCKET
 # include <net/route.h>
@@ -32,6 +33,7 @@
 #  include <linux/rtnetlink.h>
 # endif
 #endif
+*/
 
 /* From ntp_request.h - after nuking ntpdc */
 #define IFS_EXISTS      1       /* just exists */
@@ -181,7 +183,6 @@ struct vsock {
 
 static vsock_t	*fd_list;
 
-#undef USE_ROUTING_SOCKET
 #if defined(USE_ROUTING_SOCKET)
 /*
  * async notification processing (e. g. routing sockets)

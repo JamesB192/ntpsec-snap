@@ -1,0 +1,126 @@
+version: 'edge101plus'
+name: ntpsec-jamesb192
+summary: The Network Time Protocol suite, refactored # 79 char long summary
+description: |
+         NTPsec, as its name implies, is a more secure NTP. Our goal is to
+         deliver code that can be used with confidence in deployments with the
+         most stringent security, availability, and assurance requirements.
+         Towards that end we apply best practices and state-of-the art
+         technology in code auditing, verification, and testing. We begin with
+         the most important best practice: true open-source code review.
+         The NTPsec code is available in a public git repository. One of our
+         goals is to support broader community participation.
+
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: devmode # use 'strict' once you have the right plugs and slots
+#license: (BSD2 with BSD3 with ISC with NTP with MIT with CC-BY-4.0 with Beerware)
+
+apps:
+  d:
+    command: sbin/ntpd -gn -c $SNAP/etc/default.conf
+    plugs: [network,network-bind,time-control]
+    daemon: simple
+    restart-condition: never
+  dig:
+    command: python3.5 ${SNAP}/bin/ntpdig
+    plugs: [network]
+    environment:
+      PYTHONPATH: $SNAP/lib/python3.5/site-packages
+  frob:
+    command: bin/ntpfrob
+  keygen:
+    command: python3.5 ${SNAP}/bin/ntpkeygen
+    environment:
+      PYTHONPATH: $SNAP/lib/python3.5/site-packages
+  leapfetch:
+    command: bin/ntpleapfetch
+    plugs: [network]
+  loggps:
+    command: python3.5 ${SNAP}/bin/ntploggps
+    daemon: simple
+  logtemp:
+    command: python3.5 ${SNAP}/bin/ntplogtemp
+    plugs: [hardware-observe]
+    environment:
+      PYTHONPATH: $SNAP/lib/python3.5/site-packages
+  mon:
+    command: python3.5 ${SNAP}/bin/ntpmon
+    environment:
+      PYTHONPATH: $SNAP/lib/python3.5/site-packages
+    plugs: [network]
+  q:
+    command: python3.5  ${SNAP}/bin/ntpq
+    environment:
+      PYTHONPATH: $SNAP/lib/python3.5/site-packages
+    plugs: [network]
+  snmpd:
+    command: python3.5 ${SNAP}/bin/ntpsnmpd
+    environment:
+      PYTHONPATH: $SNAP/lib/python3.5/site-packages
+  time:
+    command: bin/ntptime
+    plugs: [network]
+  sweep:
+    command: python3.5 ${SNAP}/bin/ntpsweep
+    environment:
+      PYTHONPATH: $SNAP/lib/python3.5/site-packages
+    plugs: [network]
+  trace:
+    command: python3.5 ${SNAP}/bin/ntptrace
+    environment:
+      PYTHONPATH: $SNAP/lib/python3.5/site-packages
+    plugs: [network]
+  viz:
+    command: python3.5 ${SNAP}/bin/ntpviz
+    environment:
+      PYTHONPATH: $SNAP/lib/python3.5/site-packages
+  wait:
+    command: python3.5 ${SNAP}/bin/ntpwait
+    environment:
+      PYTHONPATH: $SNAP/lib/python3.5/site-packages
+
+parts:
+  ntpsec-jamesb192:
+    build-packages:
+      - build-essential
+      - bison
+      - libcap2
+      - libcap-dev
+      - libseccomp-dev
+      - libssl1.0.0
+      - libssl-dev
+      - netbase
+      - python3.5-dev
+    plugin: waf
+    source: .
+    configflags:
+      - --check
+      - --disable-manpage
+      - --disable-mdns-registration
+      - --enable-leap-smear
+      - --enable-mssntp
+      - --enable-seccomp
+      - --nopyo
+      - --prefix=/
+      - --python=python3.5
+  files:
+    source: etc/ntp.d
+    plugin: dump
+    organize:
+      default.conf: etc/
+      use-gpsd-json: etc/
+      use-gpsd-shm: etc/
+      use-minimal-logging: etc/
+      use-no-remote-configuration: etc/
+      use-performance-logging: etc/
+      use-pool: etc/
+
+#layout:
+#  /usr/share/man:
+#    bind: $SNAP/usr/share/man/
+#  /usr/share/doc/ntpsec:
+#    symlink: $SNAP/usr/share/doc/ntpsec/
+#  /var/log/ntpd.log:
+#    symlink: $SNAP/var/log/ntpd.log
+#  /var/log/ntpstats:
+#    symlink: $SNAP/var/log/ntpstats/

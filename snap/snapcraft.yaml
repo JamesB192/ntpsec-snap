@@ -22,60 +22,60 @@ apps:
     daemon: simple
     restart-condition: never
   dig:
-    command: python3.5 ${SNAP}/bin/ntpdig
+    command: python3 ${SNAP}/bin/ntpdig
     plugs: [network]
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
   frob:
     command: bin/ntpfrob
   keygen:
-    command: python3.5 ${SNAP}/bin/ntpkeygen
+    command: python3 ${SNAP}/bin/ntpkeygen
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
   leapfetch:
     command: bin/ntpleapfetch
     plugs: [network]
   loggps:
-    command: python3.5 ${SNAP}/bin/ntploggps
+    command: python3 ${SNAP}/bin/ntploggps
     daemon: simple
   logtemp:
-    command: python3.5 ${SNAP}/bin/ntplogtemp
+    command: python3 ${SNAP}/bin/ntplogtemp
     plugs: [hardware-observe]
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
   mon:
-    command: python3.5 ${SNAP}/bin/ntpmon
+    command: python3 ${SNAP}/bin/ntpmon
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
     plugs: [network]
   q:
-    command: python3.5  ${SNAP}/bin/ntpq
+    command: python3  ${SNAP}/bin/ntpq
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
     plugs: [network]
   snmpd:
-    command: python3.5 ${SNAP}/bin/ntpsnmpd
+    command: python3 ${SNAP}/bin/ntpsnmpd
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
   time:
     command: bin/ntptime
     plugs: [network]
   sweep:
-    command: python3.5 ${SNAP}/bin/ntpsweep
+    command: python3 ${SNAP}/bin/ntpsweep
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
     plugs: [network]
   trace:
-    command: python3.5 ${SNAP}/bin/ntptrace
+    command: python3 ${SNAP}/bin/ntptrace
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
     plugs: [network]
   viz:
-    command: python3.5 ${SNAP}/bin/ntpviz
+    command: python3 ${SNAP}/bin/ntpviz
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
   wait:
-    command: python3.5 ${SNAP}/bin/ntpwait
+    command: python3 ${SNAP}/bin/ntpwait
     environment:
       PYTHONPATH: $SNAP/lib/python3.5/site-packages
 
@@ -90,7 +90,7 @@ parts:
       - libssl1.0.0
       - libssl-dev
       - netbase
-      - python3.5-dev
+      - python3-dev
     plugin: waf
     source: .
     configflags:
@@ -100,9 +100,8 @@ parts:
       - --enable-leap-smear
       - --enable-mssntp
       - --enable-seccomp
-      - --nopyo
       - --prefix=/
-      - --python=python3.5
+      - --python=python3
   files:
     source: etc/ntp.d
     plugin: dump
